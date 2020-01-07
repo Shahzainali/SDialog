@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/root"
+    android:background="@drawable/dialogbackground"
+    android:padding="15dp"
+    android:layout_marginTop="30dp"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/cross"
+        android:tint="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/image"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:textColor="@color/white"
+
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:id="@+id/title"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Some fields are missing"
+        android:textColor="@color/white"
+
+        android:layout_gravity="center"
+        android:id="@+id/desc"
+
+        />
+</LinearLayout>
+
+
+</RelativeLayout>
