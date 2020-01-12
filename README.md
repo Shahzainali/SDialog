@@ -23,7 +23,7 @@ Step 2. Add the dependency
 	}
 ```
 ### Usage
-
+```sh
 SDialog.Builder(this)
     .setTitle("My Dialog")  
     .setMessage("this")
@@ -32,7 +32,7 @@ SDialog.Builder(this)
     .setType(SDialog.FAIL) //FAIL or SUCCESS
     .setCancellable(false)
     .build()
-
+```
 | Email | shahzainali93@gmail.com |
 | Linkedin | https://www.linkedin.com/in/shahzainali/ |
 | stackoverflow | https://stackoverflow.com/users/5154783/shahzain-ali |
