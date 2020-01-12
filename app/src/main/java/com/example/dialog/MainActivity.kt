@@ -15,8 +15,14 @@ class MainActivity : AppCompatActivity() {
 
         btn.setOnClickListener {
 
-            SDialog.Builder(this).setTitle("My Dialog").setMessage("this").setDuration(5000)
-                .setSpeed(400).setType(SDialog.FAIL).setCancellable(false).build()
+            SDialog.Builder(this)
+                .setTitle("My Dialog")
+                .setMessage("this")
+                .setDuration(5000)
+                .setSpeed(400)
+                .setType(SDialog.SUCCESS)
+                .setCancellable(false)
+                .build()
 
 
         }
