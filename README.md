@@ -29,13 +29,19 @@ SDialog.Builder(this)
     .setMessage("this")
     .setDuration(5000) //how long dialog will display
     .setSpeed(400) //animation speed
-    .setType(SDialog.FAIL) //FAIL or SUCCESS
+    .setType(SDialog.SUCCESS) //FAIL or SUCCESS
     .setCancellable(false)
     .build()
 ```
-| Email | shahzainali93@gmail.com |
-| Linkedin | https://www.linkedin.com/in/shahzainali/ |
-| stackoverflow | https://stackoverflow.com/users/5154783/shahzain-ali |
 
+![](sdialog.gif)
+
+
+### Contact
+```sh
+| Email |           shahzainali93@gmail.com |
+| Linkedin |        https://www.linkedin.com/in/shahzainali/ |
+| stackoverflow |   https://stackoverflow.com/users/5154783/shahzain-ali |
+```
 
 
