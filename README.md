@@ -24,14 +24,18 @@ Step 2. Add the dependency
 ```
 ### Usage
 ```sh
-SDialog.Builder(this)
-    .setTitle("My Dialog")  
-    .setMessage("this")
-    .setDuration(5000) //how long dialog will display
-    .setSpeed(400) //animation speed
-    .setType(SDialog.SUCCESS) //FAIL or SUCCESS
-    .setCancellable(false)
-    .build()
+  SDialog.Builder(this)
+                .setTitle("My Dialog")                  //set title
+                .setMessage("this")                     //set message
+                .setDuration(5000)                      //how long dialog will display
+                .setSpeed(400)                          //animation speed
+                .setCancellable(false)
+                .setBackgroundColor(Color.DKGRAY)       
+                .setTitleColor(Color.WHITE)
+                .setMessageColor(Color.WHITE)
+                .setImage(R.drawable.cross)             //optional
+                .setImageTint(Color.CYAN)
+                .build()
 ```
 
 ![](sdialog.gif)

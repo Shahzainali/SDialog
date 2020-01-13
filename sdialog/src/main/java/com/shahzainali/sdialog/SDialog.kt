@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Handler
 import android.view.Gravity
 import android.view.View
@@ -16,37 +17,44 @@ import kotlinx.android.synthetic.main.message_dialog.*
 
 
 class SDialog(
-    context: Context,
-    title: String,
-    message: String,
-    duration: Long,
-    speed: Long,
-    type: Int,
-    isCancellable: Boolean
+        context: Context,
+        title: String,
+        message: String,
+        duration: Long,
+        speed: Long,
+        isCancellable: Boolean,
+        backColor: Int,
+        titleColor: Int,
+        messageColor: Int,
+        image: Int?,
+        imageTint: Int
 ) {
 
-    companion object {
-
-        val SUCCESS = 1
-        val FAIL = 0
-    }
 
     data class Builder(
-        var context: Context,
-        private var title: String = "Title",
-        private var message: String = "Message",
-        private var duration: Long = 3000,
-        private var speed: Long = 700,
-        private var type: Int = 1,
-        private var isCancellable: Boolean = true
+            var context: Context,
+            private var title: String = "Title",
+            private var message: String = "Message",
+            private var duration: Long = 3000,
+            private var speed: Long = 700,
+            private var isCancellable: Boolean = true,
+            private var backColor: Int = Color.DKGRAY,
+            private var titleColor: Int = Color.WHITE,
+            private var messageColor: Int = Color.WHITE,
+            private var image: Int? = null,
+            private var imageTint: Int = Color.BLACK
     ) {
         fun setTitle(title: String) = apply { this.title = title }
         fun setMessage(message: String) = apply { this.message = message }
         fun setDuration(duration: Long) = apply { this.duration = duration }
         fun setSpeed(speed: Long) = apply { this.speed = speed }
-        fun setType(type: Int) = apply { this.type = type }
         fun setCancellable(isCancellable: Boolean) = apply { this.isCancellable = isCancellable }
-        fun build() = SDialog(context, title, message, duration, speed, type, isCancellable)
+        fun setBackgroundColor(backColor: Int) = apply { this.backColor = backColor }
+        fun setTitleColor(titleColor: Int) = apply { this.titleColor = titleColor }
+        fun setMessageColor(descriptionColor: Int) = apply { this.messageColor = descriptionColor }
+        fun setImage(image: Int?) = apply { this.image = image }
+        fun setImageTint(imageTint: Int) = apply { this.imageTint = imageTint }
+        fun build() = SDialog(context, title, message, duration, speed, isCancellable, backColor, titleColor, messageColor, image, imageTint)
 
     }
 
@@ -63,14 +71,23 @@ class SDialog(
         dialog.title.text = title
         dialog.desc.text = message
 
+        dialog.title.setTextColor(titleColor)
+        dialog.desc.setTextColor(messageColor)
+
         dialog.setCancelable(isCancellable)
 
 
         val ddd = dialog.findViewById<RelativeLayout>(R.id.root)
-        if (type == 1) {
-            ddd.setBackgroundResource(R.drawable.dialogbackgroundsuccess)
+
+        if (image == null) {
             dialog.image.visibility = View.GONE
+        } else {
+            dialog.image.visibility = View.VISIBLE
+            dialog.image.setImageResource(image)
+            dialog.image.setColorFilter(imageTint)
         }
+
+        ddd.background = generateDrawable(backColor)
         dialog.show()
 
 
@@ -84,10 +101,10 @@ class SDialog(
     }
 
     private fun animator(
-        dialog: Dialog,
-        dialogLayout: RelativeLayout,
-        speed: Long,
-        isReverse: Boolean
+            dialog: Dialog,
+            dialogLayout: RelativeLayout,
+            speed: Long,
+            isReverse: Boolean
     ) {
         var valueAnimator: ValueAnimator = if (!isReverse)
             ValueAnimator.ofFloat(-360f, 0f)
@@ -121,5 +138,13 @@ class SDialog(
 
         })
     }
+
+    private fun generateDrawable(backColor: Int): GradientDrawable {
+        val gd = GradientDrawable()
+        gd.setColor(backColor)
+        gd.cornerRadius = 15f
+        return gd
+    }
+
 
 }

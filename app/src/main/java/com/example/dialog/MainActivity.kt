@@ -1,5 +1,7 @@
 package com.example.dialog
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +18,16 @@ class MainActivity : AppCompatActivity() {
         btn.setOnClickListener {
 
             SDialog.Builder(this)
-                .setTitle("My Dialog")
-                .setMessage("this")
-                .setDuration(5000)
-                .setSpeed(400)
-                .setType(SDialog.SUCCESS)
+                .setTitle("My Dialog")                  //set title
+                .setMessage("this")                     //set message
+                .setDuration(5000)                      //how long dialog will display
+                .setSpeed(400)                          //animation speed
                 .setCancellable(false)
+                .setBackgroundColor(Color.DKGRAY)
+                .setTitleColor(Color.WHITE)
+                .setMessageColor(Color.WHITE)
+                .setImage(R.drawable.cross)             //optional
+                .setImageTint(Color.CYAN)
                 .build()
 
 
