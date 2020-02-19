@@ -24,15 +24,19 @@ Step 2. Add the dependency
 ```
 ### Usage
 ```sh
-  SDialog.Builder(this)
+SDialog.Builder(this)
                 .setTitle("My Dialog")                  //set title
                 .setMessage("this")                     //set message
                 .setDuration(5000)                      //how long dialog will display
                 .setSpeed(400)                          //animation speed
-                .setCancellable(false)
-                .setBackgroundColor(Color.DKGRAY)       
+                .setCancellable(true)
+                .setBackgroundColor(Color.DKGRAY)
                 .setTitleColor(Color.WHITE)
                 .setMessageColor(Color.WHITE)
+                .setMessageTypeface(Typeface.createFromAsset(assets, "Poppins-Light.ttf"))
+                .setTitleTypeface(Typeface.createFromAsset(assets, "Poppins-Medium.ttf"))
+                .setTitleTextSize(20F)
+                .setMessageTextSize(14F)
                 .setImage(R.drawable.cross)             //optional
                 .setImageTint(Color.CYAN)
                 .build()

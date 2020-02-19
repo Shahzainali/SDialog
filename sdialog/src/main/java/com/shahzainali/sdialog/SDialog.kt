@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Handler
@@ -13,36 +14,46 @@ import android.view.View
 import android.view.Window
 import android.view.animation.LinearInterpolator
 import android.widget.RelativeLayout
+import android.widget.TextView
 import kotlinx.android.synthetic.main.message_dialog.*
 
 
 class SDialog(
-        context: Context,
-        title: String,
-        message: String,
-        duration: Long,
-        speed: Long,
-        isCancellable: Boolean,
-        backColor: Int,
-        titleColor: Int,
-        messageColor: Int,
-        image: Int?,
-        imageTint: Int
+    context: Context,
+    title: String,
+    message: String,
+    duration: Long,
+    speed: Long,
+    isCancellable: Boolean,
+    backColor: Int,
+    titleColor: Int,
+    messageColor: Int,
+    image: Int?,
+    imageTint: Int,
+    messageTextSize: Float,
+    titleTextSize: Float,
+    titleTypeface: Typeface?,
+    messageTypeface: Typeface?
 ) {
 
 
     data class Builder(
-            var context: Context,
-            private var title: String = "Title",
-            private var message: String = "Message",
-            private var duration: Long = 3000,
-            private var speed: Long = 700,
-            private var isCancellable: Boolean = true,
-            private var backColor: Int = Color.DKGRAY,
-            private var titleColor: Int = Color.WHITE,
-            private var messageColor: Int = Color.WHITE,
-            private var image: Int? = null,
-            private var imageTint: Int = Color.BLACK
+        var context: Context,
+        private var title: String = "Title",
+        private var message: String = "Message",
+        private var duration: Long = 3000,
+        private var speed: Long = 700,
+        private var isCancellable: Boolean = true,
+        private var backColor: Int = Color.DKGRAY,
+        private var titleColor: Int = Color.WHITE,
+        private var messageColor: Int = Color.WHITE,
+        private var image: Int? = null,
+        private var imageTint: Int = Color.BLACK,
+        private var messageTextSize: Float = 14F,
+        private var titleTextSize: Float = 18F,
+        private var titleTypeface: Typeface? = null,
+        private var messageTypeface: Typeface? = null
+
     ) {
         fun setTitle(title: String) = apply { this.title = title }
         fun setMessage(message: String) = apply { this.message = message }
@@ -54,7 +65,11 @@ class SDialog(
         fun setMessageColor(descriptionColor: Int) = apply { this.messageColor = descriptionColor }
         fun setImage(image: Int?) = apply { this.image = image }
         fun setImageTint(imageTint: Int) = apply { this.imageTint = imageTint }
-        fun build() = SDialog(context, title, message, duration, speed, isCancellable, backColor, titleColor, messageColor, image, imageTint)
+        fun setMessageTextSize(messageTextSize: Float) = apply {  this.messageTextSize = messageTextSize}
+        fun setTitleTextSize(titleTextSize: Float) = apply {  this.titleTextSize = titleTextSize}
+        fun setTitleTypeface(titleTypeface: Typeface?)= apply { this.titleTypeface = titleTypeface }
+        fun setMessageTypeface(messageTypeface: Typeface?)= apply { this.messageTypeface = messageTypeface }
+        fun build() = SDialog(context, title, message, duration, speed, isCancellable, backColor, titleColor, messageColor, image, imageTint, messageTextSize, titleTextSize, titleTypeface, messageTypeface)
 
     }
 
@@ -70,6 +85,17 @@ class SDialog(
 
         dialog.title.text = title
         dialog.desc.text = message
+
+        dialog.title.textSize = titleTextSize
+        if (titleTypeface != null) {
+            setFont(titleTypeface, dialog.title)
+        }
+
+        if (messageTypeface != null) {
+            setFont(messageTypeface, dialog.desc)
+        }
+
+        dialog.desc.textSize = messageTextSize
 
         dialog.title.setTextColor(titleColor)
         dialog.desc.setTextColor(messageColor)
@@ -98,6 +124,11 @@ class SDialog(
             animator(dialog, ddd, speed, true)
         }, duration)
 
+    }
+
+    open fun setFont(typeface: Typeface, textView: TextView) {
+      //  val typeface = Typeface.createFromAsset(assets, font)
+        textView.typeface = typeface
     }
 
     private fun animator(

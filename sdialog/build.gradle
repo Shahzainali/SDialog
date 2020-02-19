@@ -13,7 +13,7 @@ ext{
 
     publishedGroupId = 'com.shahzainali.sdialog'
     artifact = 'sdialog'
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.3.0'
 
     libraryDescription = 'A Modified version of Dialog with animations and easy to use.'
     siteUrl = 'https://github.com/Shahzainali/SDialog'
@@ -34,7 +34,7 @@ android {
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 2
-        versionName "1.2.0"
+        versionName "1.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
