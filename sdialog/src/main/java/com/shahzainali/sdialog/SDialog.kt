@@ -33,7 +33,8 @@ class SDialog(
     messageTextSize: Float,
     titleTextSize: Float,
     titleTypeface: Typeface?,
-    messageTypeface: Typeface?
+    messageTypeface: Typeface?,
+    sDialogRadius: Float
 ) {
 
 
@@ -52,7 +53,8 @@ class SDialog(
         private var messageTextSize: Float = 14F,
         private var titleTextSize: Float = 18F,
         private var titleTypeface: Typeface? = null,
-        private var messageTypeface: Typeface? = null
+        private var messageTypeface: Typeface? = null,
+        private var sDialogRadius: Float = 15F
 
     ) {
         fun setTitle(title: String) = apply { this.title = title }
@@ -65,11 +67,35 @@ class SDialog(
         fun setMessageColor(descriptionColor: Int) = apply { this.messageColor = descriptionColor }
         fun setImage(image: Int?) = apply { this.image = image }
         fun setImageTint(imageTint: Int) = apply { this.imageTint = imageTint }
-        fun setMessageTextSize(messageTextSize: Float) = apply {  this.messageTextSize = messageTextSize}
-        fun setTitleTextSize(titleTextSize: Float) = apply {  this.titleTextSize = titleTextSize}
-        fun setTitleTypeface(titleTypeface: Typeface?)= apply { this.titleTypeface = titleTypeface }
-        fun setMessageTypeface(messageTypeface: Typeface?)= apply { this.messageTypeface = messageTypeface }
-        fun build() = SDialog(context, title, message, duration, speed, isCancellable, backColor, titleColor, messageColor, image, imageTint, messageTextSize, titleTextSize, titleTypeface, messageTypeface)
+        fun setMessageTextSize(messageTextSize: Float) =
+            apply { this.messageTextSize = messageTextSize }
+
+        fun setTitleTextSize(titleTextSize: Float) = apply { this.titleTextSize = titleTextSize }
+        fun setTitleTypeface(titleTypeface: Typeface?) =
+            apply { this.titleTypeface = titleTypeface }
+
+        fun setMessageTypeface(messageTypeface: Typeface?) =
+            apply { this.messageTypeface = messageTypeface }
+
+        fun setRadius(sDialogRadius: Float) = apply { this.sDialogRadius = sDialogRadius }
+        fun build() = SDialog(
+            context,
+            title,
+            message,
+            duration,
+            speed,
+            isCancellable,
+            backColor,
+            titleColor,
+            messageColor,
+            image,
+            imageTint,
+            messageTextSize,
+            titleTextSize,
+            titleTypeface,
+            messageTypeface,
+            sDialogRadius
+        )
 
     }
 
@@ -113,7 +139,7 @@ class SDialog(
             dialog.image.setColorFilter(imageTint)
         }
 
-        ddd.background = generateDrawable(backColor)
+        ddd.background = generateDrawable(backColor, sDialogRadius)
         dialog.show()
 
 
@@ -127,15 +153,15 @@ class SDialog(
     }
 
     open fun setFont(typeface: Typeface, textView: TextView) {
-      //  val typeface = Typeface.createFromAsset(assets, font)
+        //  val typeface = Typeface.createFromAsset(assets, font)
         textView.typeface = typeface
     }
 
     private fun animator(
-            dialog: Dialog,
-            dialogLayout: RelativeLayout,
-            speed: Long,
-            isReverse: Boolean
+        dialog: Dialog,
+        dialogLayout: RelativeLayout,
+        speed: Long,
+        isReverse: Boolean
     ) {
         var valueAnimator: ValueAnimator = if (!isReverse)
             ValueAnimator.ofFloat(-360f, 0f)
@@ -170,10 +196,10 @@ class SDialog(
         })
     }
 
-    private fun generateDrawable(backColor: Int): GradientDrawable {
+    private fun generateDrawable(backColor: Int, radius: Float): GradientDrawable {
         val gd = GradientDrawable()
         gd.setColor(backColor)
-        gd.cornerRadius = 15f
+        gd.cornerRadius = radius
         return gd
     }
 

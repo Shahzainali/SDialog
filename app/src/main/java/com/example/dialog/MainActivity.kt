@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                 .setMessageTextSize(14F)
                 .setImage(R.drawable.cross)             //optional
                 .setImageTint(Color.CYAN)
+                .setRadius(10F)
                 .build()
         }
 
