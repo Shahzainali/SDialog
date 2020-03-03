@@ -38,6 +38,7 @@
         android:text="Some fields are missing"
         android:textColor="@color/white"
         android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/desc"
 
         />
